@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="oscuro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hiperbólicas Inversas · Cálculo Integral</title>
+  <script>try{document.documentElement.dataset.tema=localStorage.getItem('ci-tema')||'oscuro'}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,wght@1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body data-base="../../" data-modulo="12">
+  <div id="app-header"></div>
+  <main class="contenedor" id="contenido">
+    <div class="modulo-cab"><span class="num-grande">Módulo 12</span><h1>Hiperbólicas Inversas</h1></div>
+    <div class="pestanas" role="tablist" aria-label="Secciones del módulo"><button role="tab" id="t-teoria" aria-controls="p-teoria" aria-selected="true" tabindex="0">Teoría</button><button role="tab" id="t-visual" aria-controls="p-visual" aria-selected="false" tabindex="-1">Visualizador interactivo</button><button role="tab" id="t-ejemplos" aria-controls="p-ejemplos" aria-selected="false" tabindex="-1">Ejemplos resueltos</button></div>
+    <section id="p-teoria" role="tabpanel" aria-labelledby="t-teoria" class="panel">
+      <div class="caja"><p>$\sinh x=\frac{e^x-e^{-x}}{2}$, $\cosh x=\frac{e^x+e^{-x}}{2}$. Sus derivadas: $(\sinh x)'=\cosh x$ y $(\cosh x)'=\sinh x$, así que $\int\cosh x\,dx=\sinh x+C$.</p></div>
+      <div class="caja formula">$$\int\frac{du}{\sqrt{u^2+a^2}}=\operatorname{senh}^{-1}\frac{u}{a}+C=\ln\!\big(u+\sqrt{u^2+a^2}\big)+C$$$$\int\frac{du}{\sqrt{u^2-a^2}}=\cosh^{-1}\frac{u}{a}+C\ (u>a)\qquad \int\frac{du}{a^2-u^2}=\frac1a\tanh^{-1}\frac{u}{a}+C\ (|u|<a)$$</div>
+    </section>
+    <section id="p-visual" role="tabpanel" aria-labelledby="t-visual" class="panel" hidden>
+      <div id="viz"></div>
+    </section>
+    <section id="p-ejemplos" role="tabpanel" aria-labelledby="t-ejemplos" class="panel" hidden>
+      <div class="caja ejemplo"><h3>Ejemplo 1 · $\displaystyle\int\frac{dx}{\sqrt{x^2+4}}$</h3><p>$a=2$:</p>$$\operatorname{senh}^{-1}\frac{x}{2}+C=\ln\!\big(x+\sqrt{x^2+4}\big)+C$$</div>
+      <div class="caja ejemplo"><h3>Ejemplo 2 · $\displaystyle\int\frac{dx}{\sqrt{x^2-25}}\ (x>5)$</h3><p>$a=5$:</p>$$\cosh^{-1}\frac{x}{5}+C=\ln\!\big(x+\sqrt{x^2-25}\big)+C$$</div>
+      <div class="caja ejemplo"><h3>Ejemplo 3 · $\displaystyle\int\frac{dx}{1-x^2}\ (|x|<1)$</h3><p>$a=1$:</p>$$\tanh^{-1}x+C=\tfrac12\ln\left|\frac{1+x}{1-x}\right|+C$$</div>
+    </section>
+    <div id="nav-modulos"></div>
+  </main>
+  <footer class="pie"><div class="contenedor">Universidad Tecnológica de Pereira · Cálculo Integral · Desarrollado con asistencia de IA</div></footer>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjs@12.4.2/lib/browser/math.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="../../assets/js/modulos-data.js"></script>
+  <script src="../../assets/js/ui.js"></script>
+  <script src="../../assets/js/matematicas.js"></script>
+  <script src="../../assets/js/graficos.js"></script>
+  <script src="../../assets/js/antiderivada.js"></script>
+  <script>
+    Antiderivada({ contenedor: 'viz', presets: [
+ {
+  "txt": "∫ dx/√(x²+1)",
+  "f": "1/sqrt(x^2+1)",
+  "F": "asinh(x)",
+  "fT": "\\frac{1}{\\sqrt{x^2+1}}",
+  "FT": "\\operatorname{senh}^{-1}x",
+  "r": [
+   -4,
+   4
+  ]
+ },
+ {
+  "txt": "∫ dx/√(x²+9)",
+  "f": "1/sqrt(x^2+9)",
+  "F": "asinh(x/3)",
+  "fT": "\\frac{1}{\\sqrt{x^2+9}}",
+  "FT": "\\operatorname{senh}^{-1}\\frac{x}{3}",
+  "r": [
+   -6,
+   6
+  ]
+ },
+ {
+  "txt": "∫ dx/√(x²−1)",
+  "f": "1/sqrt(x^2-1)",
+  "F": "acosh(x)",
+  "fT": "\\frac{1}{\\sqrt{x^2-1}}",
+  "FT": "\\cosh^{-1}x",
+  "r": [
+   1.05,
+   5
+  ]
+ },
+ {
+  "txt": "∫ dx/(1−x²)",
+  "f": "1/(1-x^2)",
+  "F": "atanh(x)",
+  "fT": "\\frac{1}{1-x^2}",
+  "FT": "\\tanh^{-1}x",
+  "r": [
+   -0.9,
+   0.9
+  ],
+  "y": [
+   -6,
+   6
+  ]
+ },
+ {
+  "txt": "∫ cosh x dx",
+  "f": "cosh(x)",
+  "F": "sinh(x)",
+  "fT": "\\cosh x",
+  "FT": "\\sinh x",
+  "r": [
+   -3,
+   3
+  ]
+ }
+] });
+  </script>
+</body>
+</html>

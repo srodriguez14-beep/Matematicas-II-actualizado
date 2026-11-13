@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="oscuro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Integración por Partes · Cálculo Integral</title>
+  <script>try{document.documentElement.dataset.tema=localStorage.getItem('ci-tema')||'oscuro'}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,wght@1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body data-base="../../" data-modulo="14">
+  <div id="app-header"></div>
+  <main class="contenedor" id="contenido">
+    <div class="modulo-cab"><span class="num-grande">Módulo 14</span><h1>Integración por Partes</h1></div>
+    <div class="pestanas" role="tablist" aria-label="Secciones del módulo"><button role="tab" id="t-teoria" aria-controls="p-teoria" aria-selected="true" tabindex="0">Teoría</button><button role="tab" id="t-visual" aria-controls="p-visual" aria-selected="false" tabindex="-1">Visualizador interactivo</button><button role="tab" id="t-ejemplos" aria-controls="p-ejemplos" aria-selected="false" tabindex="-1">Ejemplos resueltos</button></div>
+    <section id="p-teoria" role="tabpanel" aria-labelledby="t-teoria" class="panel">
+      <div class="caja formula"><p>Viene de la regla del producto $(uv)'=u'v+uv'$. Integrando:</p>$$\int u\,dv=uv-\int v\,du$$</div>
+      <div class="caja"><h3>¿Cómo elegir u? Regla LIATE</h3><p>Elige como $u$ lo que aparezca primero en: <b>L</b>ogarítmica, <b>I</b>nversa trigonométrica, <b>A</b>lgebraica, <b>T</b>rigonométrica, <b>E</b>xponencial. El resto es $dv$.</p><p>Si $v\,du$ queda igual de difícil, prueba otra elección; en integrales cíclicas ($e^x\sin x$) se aplica dos veces y se despeja.</p></div>
+    </section>
+    <section id="p-visual" role="tabpanel" aria-labelledby="t-visual" class="panel" hidden>
+      <div id="viz"></div>
+    </section>
+    <section id="p-ejemplos" role="tabpanel" aria-labelledby="t-ejemplos" class="panel" hidden>
+      <div class="caja ejemplo"><h3>Ejemplo 1 · $\displaystyle\int x\,e^x\,dx$</h3><p>$u=x,\ dv=e^xdx\Rightarrow du=dx,\ v=e^x$.</p>$$xe^x-\int e^xdx=xe^x-e^x+C$$</div>
+      <div class="caja ejemplo"><h3>Ejemplo 2 · $\displaystyle\int x\cos x\,dx$</h3><p>$u=x,\ dv=\cos x\,dx\Rightarrow v=\sin x$.</p>$$x\sin x-\int\sin x\,dx=x\sin x+\cos x+C$$</div>
+      <div class="caja ejemplo"><h3>Ejemplo 3 · $\displaystyle\int x\ln x\,dx$</h3><p>$u=\ln x,\ dv=x\,dx\Rightarrow du=\frac{dx}{x},\ v=\frac{x^2}{2}$.</p>$$\frac{x^2}{2}\ln x-\int\frac{x}{2}dx=\frac{x^2}{2}\ln x-\frac{x^2}{4}+C$$</div>
+      <div class="caja ejemplo"><h3>Ejemplo 4 · $\displaystyle\int e^x\sin x\,dx$ (cíclica)</h3><p>Aplicando partes dos veces se vuelve a la misma integral $I$:</p>$$I=e^x\sin x-\int e^x\cos x\,dx=e^x\sin x-\Big(e^x\cos x+I\Big)$$$$2I=e^x(\sin x-\cos x)\;\Rightarrow\;I=\frac{e^x(\sin x-\cos x)}{2}+C$$</div>
+    </section>
+    <div id="nav-modulos"></div>
+  </main>
+  <footer class="pie"><div class="contenedor">Universidad Tecnológica de Pereira · Cálculo Integral · Desarrollado con asistencia de IA</div></footer>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjs@12.4.2/lib/browser/math.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="../../assets/js/modulos-data.js"></script>
+  <script src="../../assets/js/ui.js"></script>
+  <script src="../../assets/js/matematicas.js"></script>
+  <script src="../../assets/js/graficos.js"></script>
+  <script src="../../assets/js/antiderivada.js"></script>
+  <script>
+    Antiderivada({ contenedor: 'viz', presets: [
+ {
+  "txt": "∫ x·eˣ dx",
+  "f": "x*e^x",
+  "F": "x*e^x-e^x",
+  "fT": "x\\,e^x",
+  "FT": "xe^x-e^x",
+  "r": [
+   -3,
+   2
+  ]
+ },
+ {
+  "txt": "∫ x·cos x dx",
+  "f": "x*cos(x)",
+  "F": "x*sin(x)+cos(x)",
+  "fT": "x\\cos x",
+  "FT": "x\\sin x+\\cos x",
+  "r": [
+   -6,
+   6
+  ]
+ },
+ {
+  "txt": "∫ x·ln x dx",
+  "f": "x*log(x)",
+  "F": "x^2*log(x)/2-x^2/4",
+  "fT": "x\\ln x",
+  "FT": "\\frac{x^2}{2}\\ln x-\\frac{x^2}{4}",
+  "r": [
+   0.1,
+   4
+  ]
+ },
+ {
+  "txt": "∫ x²·eˣ dx",
+  "f": "x^2*e^x",
+  "F": "x^2*e^x-2*x*e^x+2*e^x",
+  "fT": "x^2e^x",
+  "FT": "e^x(x^2-2x+2)",
+  "r": [
+   -4,
+   2
+  ]
+ },
+ {
+  "txt": "∫ eˣ·sen x dx",
+  "f": "e^x*sin(x)",
+  "F": "e^x*(sin(x)-cos(x))/2",
+  "fT": "e^x\\sin x",
+  "FT": "\\frac{e^x(\\sin x-\\cos x)}{2}",
+  "r": [
+   -4,
+   3
+  ]
+ }
+] });
+  </script>
+</body>
+</html>

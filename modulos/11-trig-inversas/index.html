@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="oscuro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trigonométricas Inversas · Cálculo Integral</title>
+  <script>try{document.documentElement.dataset.tema=localStorage.getItem('ci-tema')||'oscuro'}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,wght@1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body data-base="../../" data-modulo="11">
+  <div id="app-header"></div>
+  <main class="contenedor" id="contenido">
+    <div class="modulo-cab"><span class="num-grande">Módulo 11</span><h1>Trigonométricas Inversas</h1></div>
+    <div class="pestanas" role="tablist" aria-label="Secciones del módulo"><button role="tab" id="t-teoria" aria-controls="p-teoria" aria-selected="true" tabindex="0">Teoría</button><button role="tab" id="t-visual" aria-controls="p-visual" aria-selected="false" tabindex="-1">Visualizador interactivo</button><button role="tab" id="t-ejemplos" aria-controls="p-ejemplos" aria-selected="false" tabindex="-1">Ejemplos resueltos</button></div>
+    <section id="p-teoria" role="tabpanel" aria-labelledby="t-teoria" class="panel">
+      <div class="caja formula">$$\int\frac{du}{\sqrt{a^2-u^2}}=\arcsin\frac{u}{a}+C\qquad \int\frac{du}{a^2+u^2}=\frac1a\arctan\frac{u}{a}+C$$$$\int\frac{du}{u\sqrt{u^2-a^2}}=\frac1a\operatorname{arcsec}\frac{|u|}{a}+C$$</div>
+      <div class="caja"><p>Se reconoce la forma ($a^2-u^2$ bajo raíz, o $a^2+u^2$), se identifican $a$ y $u$, y se ajusta $du$. Se verifica derivando, por ejemplo $\frac{d}{dx}\arctan x=\frac{1}{1+x^2}$.</p></div>
+    </section>
+    <section id="p-visual" role="tabpanel" aria-labelledby="t-visual" class="panel" hidden>
+      <div id="viz"></div>
+    </section>
+    <section id="p-ejemplos" role="tabpanel" aria-labelledby="t-ejemplos" class="panel" hidden>
+      <div class="caja ejemplo"><h3>Ejemplo 1 · $\displaystyle\int\frac{dx}{9+x^2}$</h3><p>$a=3$, $u=x$.</p>$$\frac13\arctan\frac{x}{3}+C$$</div>
+      <div class="caja ejemplo"><h3>Ejemplo 2 · $\displaystyle\int\frac{dx}{\sqrt{16-x^2}}$</h3><p>$a=4$, $u=x$.</p>$$\arcsin\frac{x}{4}+C$$</div>
+      <div class="caja ejemplo"><h3>Ejemplo 3 · $\displaystyle\int\frac{dx}{1+4x^2}$</h3><p>$u=2x$, $dx=\tfrac12du$, $a=1$.</p>$$\tfrac12\int\frac{du}{1+u^2}=\tfrac12\arctan(2x)+C$$</div>
+    </section>
+    <div id="nav-modulos"></div>
+  </main>
+  <footer class="pie"><div class="contenedor">Universidad Tecnológica de Pereira · Cálculo Integral · Desarrollado con asistencia de IA</div></footer>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjs@12.4.2/lib/browser/math.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="../../assets/js/modulos-data.js"></script>
+  <script src="../../assets/js/ui.js"></script>
+  <script src="../../assets/js/matematicas.js"></script>
+  <script src="../../assets/js/graficos.js"></script>
+  <script src="../../assets/js/antiderivada.js"></script>
+  <script>
+    Antiderivada({ contenedor: 'viz', presets: [
+ {
+  "txt": "∫ dx/√(1−x²)",
+  "f": "1/sqrt(1-x^2)",
+  "F": "asin(x)",
+  "fT": "\\frac{1}{\\sqrt{1-x^2}}",
+  "FT": "\\arcsin x",
+  "r": [
+   -0.95,
+   0.95
+  ]
+ },
+ {
+  "txt": "∫ dx/(1+x²)",
+  "f": "1/(1+x^2)",
+  "F": "atan(x)",
+  "fT": "\\frac{1}{1+x^2}",
+  "FT": "\\arctan x",
+  "r": [
+   -4,
+   4
+  ]
+ },
+ {
+  "txt": "∫ dx/(4+x²)",
+  "f": "1/(4+x^2)",
+  "F": "atan(x/2)/2",
+  "fT": "\\frac{1}{4+x^2}",
+  "FT": "\\frac12\\arctan\\frac{x}{2}",
+  "r": [
+   -5,
+   5
+  ]
+ },
+ {
+  "txt": "∫ dx/√(9−x²)",
+  "f": "1/sqrt(9-x^2)",
+  "F": "asin(x/3)",
+  "fT": "\\frac{1}{\\sqrt{9-x^2}}",
+  "FT": "\\arcsin\\frac{x}{3}",
+  "r": [
+   -2.8,
+   2.8
+  ]
+ },
+ {
+  "txt": "∫ 2/(1+4x²) dx",
+  "f": "2/(1+4*x^2)",
+  "F": "atan(2*x)",
+  "fT": "\\frac{2}{1+4x^2}",
+  "FT": "\\arctan(2x)",
+  "r": [
+   -3,
+   3
+  ]
+ }
+] });
+  </script>
+</body>
+</html>

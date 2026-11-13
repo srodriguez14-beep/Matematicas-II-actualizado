@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="oscuro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sólidos de Revolución · Cálculo Integral</title>
+  <script>try{document.documentElement.dataset.tema=localStorage.getItem('ci-tema')||'oscuro'}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,wght@1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body data-base="../../" data-modulo="15">
+  <div id="app-header"></div>
+  <main class="contenedor" id="contenido">
+    <div class="modulo-cab"><span class="num-grande">Módulo 15</span><h1>Sólidos de Revolución</h1></div>
+    <div class="pestanas" role="tablist" aria-label="Secciones del módulo"><button role="tab" id="t-teoria" aria-controls="p-teoria" aria-selected="true" tabindex="0">Teoría</button><button role="tab" id="t-visual" aria-controls="p-visual" aria-selected="false" tabindex="-1">Visualizador interactivo</button><button role="tab" id="t-ejemplos" aria-controls="p-ejemplos" aria-selected="false" tabindex="-1">Ejemplos resueltos</button></div>
+    <section id="p-teoria" role="tabpanel" aria-labelledby="t-teoria" class="panel">
+      <div class="caja"><p>Un <b>sólido de revolución</b> se genera al girar una región plana alrededor de una recta (eje). Su volumen es la «suma» de las áreas de sus secciones transversales: $V=\int_a^b A(x)\,dx$.</p></div>
+      <div class="caja formula"><h3>Método de discos (eje x)</h3><p>Cada sección es un disco de radio $f(x)$:</p>$$V=\pi\int_a^b [f(x)]^2\,dx$$<h3>Método de arandelas (eje x)</h3><p>Región entre $f$ (exterior) y $g$ (interior), con $f\ge g\ge0$:</p>$$V=\pi\int_a^b\Big([f(x)]^2-[g(x)]^2\Big)dx$$<h3>Capas cilíndricas (eje y)</h3><p>Cada capa tiene radio $x$, altura $f(x)$ y espesor $dx$ (con $a\ge0$):</p>$$V=2\pi\int_a^b x\,f(x)\,dx$$</div>
+      <div class="caja"><p><b>Cómo elegir:</b> si la región gira alrededor de un eje y la sección es perpendicular a él, usa discos o arandelas; si las secciones quedan paralelas al eje, las capas suelen ser más simples. Ambos métodos dan el mismo volumen.</p></div>
+    </section>
+    <section id="p-visual" role="tabpanel" aria-labelledby="t-visual" class="panel" hidden>
+      <div id="viz15"></div>
+    </section>
+    <section id="p-ejemplos" role="tabpanel" aria-labelledby="t-ejemplos" class="panel" hidden>
+      <div class="caja ejemplo"><h3>Ejemplo 1 · Discos: $y=\sqrt{x}$ en $[0,4]$ alrededor del eje x</h3>$$V=\pi\int_0^4(\sqrt{x})^2dx=\pi\int_0^4x\,dx=\pi\Big[\frac{x^2}{2}\Big]_0^4=8\pi\approx25.1327$$</div>
+      <div class="caja ejemplo"><h3>Ejemplo 2 · Esfera de radio 2: $y=\sqrt{4-x^2}$ en $[-2,2]$</h3>$$V=\pi\int_{-2}^{2}(4-x^2)\,dx=\pi\Big[4x-\frac{x^3}{3}\Big]_{-2}^{2}=\pi\Big(\frac{16}{3}+\frac{16}{3}\Big)=\frac{32\pi}{3}\approx33.5103$$<p>Coincide con $\tfrac43\pi r^3$.</p></div>
+      <div class="caja ejemplo"><h3>Ejemplo 3 · Arandelas: entre $y=x$ y $y=x^2$ en $[0,1]$, eje x</h3><p>Radio exterior $x$, radio interior $x^2$:</p>$$V=\pi\int_0^1(x^2-x^4)\,dx=\pi\Big[\frac{x^3}{3}-\frac{x^5}{5}\Big]_0^1=\pi\Big(\frac13-\frac15\Big)=\frac{2\pi}{15}\approx0.4189$$</div>
+      <div class="caja ejemplo"><h3>Ejemplo 4 · Capas: $y=x^2$ en $[0,2]$ alrededor del eje y</h3>$$V=2\pi\int_0^2 x\cdot x^2\,dx=2\pi\Big[\frac{x^4}{4}\Big]_0^2=2\pi\cdot4=8\pi\approx25.1327$$</div>
+    </section>
+    <div id="nav-modulos"></div>
+  </main>
+  <footer class="pie"><div class="contenedor">Universidad Tecnológica de Pereira · Cálculo Integral · Desarrollado con asistencia de IA</div></footer>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjs@12.4.2/lib/browser/math.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="../../assets/js/modulos-data.js"></script>
+  <script src="../../assets/js/ui.js"></script>
+  <script src="../../assets/js/matematicas.js"></script>
+  <script src="../../assets/js/graficos.js"></script>
+  <script src="modulo15.js"></script>
+</body>
+</html>

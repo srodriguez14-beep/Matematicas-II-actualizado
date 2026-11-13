@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="oscuro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trigonométricas · Cálculo Integral</title>
+  <script>try{document.documentElement.dataset.tema=localStorage.getItem('ci-tema')||'oscuro'}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,wght@1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+<body data-base="../../" data-modulo="10">
+  <div id="app-header"></div>
+  <main class="contenedor" id="contenido">
+    <div class="modulo-cab"><span class="num-grande">Módulo 10</span><h1>Trigonométricas</h1></div>
+    <div class="pestanas" role="tablist" aria-label="Secciones del módulo"><button role="tab" id="t-teoria" aria-controls="p-teoria" aria-selected="true" tabindex="0">Teoría</button><button role="tab" id="t-visual" aria-controls="p-visual" aria-selected="false" tabindex="-1">Visualizador interactivo</button><button role="tab" id="t-ejemplos" aria-controls="p-ejemplos" aria-selected="false" tabindex="-1">Ejemplos resueltos</button></div>
+    <section id="p-teoria" role="tabpanel" aria-labelledby="t-teoria" class="panel">
+      <div class="caja formula">$$\int\sin u\,du=-\cos u+C\qquad \int\cos u\,du=\sin u+C\qquad \int\sec^2u\,du=\tan u+C$$$$\int\csc^2u\,du=-\cot u+C\qquad \int\sec u\tan u\,du=\sec u+C\qquad \int\csc u\cot u\,du=-\csc u+C$$</div>
+      <div class="caja"><h3>Tangente y cotangente</h3>$$\int\tan u\,du=-\ln|\cos u|+C\qquad \int\cot u\,du=\ln|\sin u|+C$$<p>Si el argumento es $kx$, se divide entre $k$: $\int\cos(kx)\,dx=\frac{\sin(kx)}{k}+C$.</p></div>
+    </section>
+    <section id="p-visual" role="tabpanel" aria-labelledby="t-visual" class="panel" hidden>
+      <div id="viz"></div>
+    </section>
+    <section id="p-ejemplos" role="tabpanel" aria-labelledby="t-ejemplos" class="panel" hidden>
+      <div class="caja ejemplo"><h3>Ejemplo 1 · $\displaystyle\int \sin 3x\,dx$</h3>$$u=3x,\ dx=\tfrac13du\;\Rightarrow\;-\tfrac13\cos 3x+C$$</div>
+      <div class="caja ejemplo"><h3>Ejemplo 2 · $\displaystyle\int \cos 2x\,dx$</h3>$$\frac{\sin 2x}{2}+C$$</div>
+      <div class="caja ejemplo"><h3>Ejemplo 3 · $\displaystyle\int x\cos(x^2)\,dx$</h3><p>$u=x^2$, $x\,dx=\tfrac12du$.</p>$$\tfrac12\int\cos u\,du=\frac{\sin(x^2)}{2}+C$$</div>
+      <div class="caja ejemplo"><h3>Ejemplo 4 · $\displaystyle\int \tan x\,dx$</h3><p>$\tan x=\dfrac{\sin x}{\cos x}$; con $u=\cos x$, $du=-\sin x\,dx$:</p>$$-\int\frac{du}{u}=-\ln|\cos x|+C=\ln|\sec x|+C$$</div>
+    </section>
+    <div id="nav-modulos"></div>
+  </main>
+  <footer class="pie"><div class="contenedor">Universidad Tecnológica de Pereira · Cálculo Integral · Desarrollado con asistencia de IA</div></footer>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjs@12.4.2/lib/browser/math.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <script src="../../assets/js/modulos-data.js"></script>
+  <script src="../../assets/js/ui.js"></script>
+  <script src="../../assets/js/matematicas.js"></script>
+  <script src="../../assets/js/graficos.js"></script>
+  <script src="../../assets/js/antiderivada.js"></script>
+  <script>
+    Antiderivada({ contenedor: 'viz', presets: [
+ {
+  "txt": "∫ sen x dx",
+  "f": "sin(x)",
+  "F": "-cos(x)",
+  "fT": "\\sin x",
+  "FT": "-\\cos x",
+  "r": [
+   -6.3,
+   6.3
+  ]
+ },
+ {
+  "txt": "∫ cos 2x dx",
+  "f": "cos(2*x)",
+  "F": "sin(2*x)/2",
+  "fT": "\\cos 2x",
+  "FT": "\\frac{\\sin 2x}{2}",
+  "r": [
+   -6.3,
+   6.3
+  ]
+ },
+ {
+  "txt": "∫ sec² x dx",
+  "f": "sec(x)^2",
+  "F": "tan(x)",
+  "fT": "\\sec^2x",
+  "FT": "\\tan x",
+  "r": [
+   -1.2,
+   1.2
+  ],
+  "y": [
+   -8,
+   8
+  ]
+ },
+ {
+  "txt": "∫ x·cos(x²) dx",
+  "f": "x*cos(x^2)",
+  "F": "sin(x^2)/2",
+  "fT": "x\\cos(x^2)",
+  "FT": "\\frac{\\sin(x^2)}{2}",
+  "r": [
+   -3,
+   3
+  ]
+ },
+ {
+  "txt": "∫ tan x dx",
+  "f": "tan(x)",
+  "F": "-log(abs(cos(x)))",
+  "fT": "\\tan x",
+  "FT": "-\\ln|\\cos x|",
+  "r": [
+   -1.2,
+   1.2
+  ],
+  "y": [
+   -6,
+   6
+  ]
+ }
+] });
+  </script>
+</body>
+</html>
